@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <style>
+        body {
+            margin: 1cm;
+        }
+
+        #rootUI {
+            border: solid;
+            padding: 1cm;
+            background-image: url("images/images8/image24.jpg");
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="react-0.14.3/build/react.js"></script>
+    <script src="react-0.14.3/build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.4.0/browser-polyfill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.4.0/browser.js"></script>
+    <script type="text/babel">
+
+        class HelloComponent extends React.Component{
+            constructor(){
+                super();
+                this.name="Hello";
+                console.log("Cons......");
+                this.state={
+                    "visitorName" : "Default Visitor"
+                }
+
+                this.inputChange=this.inputChange.bind(this);
+                this.buttonClick=this.buttonClick.bind(this);
+            }
+            
+            inputChange(evt){
+                this.setState({
+                    "visitorName" :evt.target.value
+                })
+            }
+
+            buttonClick(evt){
+
+            }
+
+            componentWillUpdate(){
+            console.log("....Above to update....")    
+            }
+
+            componentDidUpdate(){
+                console.log(".....Update UI done....")
+            }
+
+            render(){
+                var res=<div>
+                            <h1>{this.name}</h1>
+                            <h1>{this.state.visitorName}</h1>
+                            <br></br>
+                            <br></br>
+                            <input value={this.state.visitorName} onChange={this.inputChange}></input>
+                            <br></br>
+                            <br></br>
+                            <button type="button" value="click" onClick={this.buttonClick}>Click</button>
+                        </div>
+                        console.log("render.......")
+                return res;
+            }
+
+            componentWillMount(){
+                console.log("Component Mounting before Did Mount");
+            }
+
+            shouldComponentUpdate(newprops, ns){
+                if(ns.visitorName=='Janu'){
+                    return false;
+                }
+                return true;
+            }
+
+            componentDidUnmount(){
+                console.log("Unmounted Done......")
+            }
+
+            componentDidMount(){
+                console.log("Component Mounting Completed");
+            }
+        }
+
+        ReactDOM.render(<HelloComponent/>,document.getElementById("rootUI"));
+
+    </script>
+</head>
+
+<body>
+    <div id="rootUI">
+    </div>
+    <script type="text/babel">
+
+    </script>
+</body>
+
+</html>
